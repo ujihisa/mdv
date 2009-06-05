@@ -11,6 +11,16 @@ def mdv2html(text)
   body
 end
 
+def headerline2hash(line)
+  m = line.match(/^# Hack #(\d+): (.*?) \| (.*?) (.*?)$/)
+  {
+    :hacknum => m[1].to_i,
+    :title => m[2],
+    :level => m[3],
+    :date => Date.parse(m[4])
+  }
+end
+
 fixture =
 <<EOF # {{{
 # Hack #22: Ultra Super Great Vim Plugin | lv2 2009-06-06
@@ -70,6 +80,18 @@ when /spec$/
       # }}}
       mdv2html(fixture).should be_instance_of(String)
       mdv2html(fixture).should == html
+    end
+  end
+
+  describe 'headerline2hash' do
+    it 'gets hash from a line of header' do
+      hash = {
+        :date => Date.parse('2009-06-06'),
+        :level => "lv2",
+        :hacknum => 22,
+        :title => "Ultra Super Great Vim Plugin"
+      }
+      headerline2hash(fixture.lines.to_a.first).should == hash
     end
   end
 end
