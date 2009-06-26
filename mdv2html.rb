@@ -7,7 +7,7 @@ def mdv2html(text)
   text = text.lines.to_a[1..-1].join # Just ignore the first line
   body = Markdown.new(text).to_html
   body.gsub!(%r!<code>\|(.*?)\|</code>!, '<kbd>\1</kbd>')
-  body.gsub!(%r!^<p>Author: (.*?)</p>$!, '<p><author>\1</author></p>') # FIXME: It should apply ONLY for the last line
+  body.gsub!(%r!^<p>Author: (.*?)</p>$!, '<address class="hack-author">\1</address>') # FIXME: It should apply ONLY for the last line
   body
 end
 
@@ -79,7 +79,7 @@ when /spec$/
       |
       |<p>blah blah blah. hara y y hara y?</p>
       |
-      |<p><author>ujihisa</author></p>
+      |<address class="hack-author">ujihisa</address>
       EOF
       # }}}
       mdv2html(fixture).should be_instance_of(String)
