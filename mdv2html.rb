@@ -48,7 +48,11 @@ EOF
 
 case $0
 when __FILE__
-  puts mdv2html(fixture)
+  if ARGV.length == 1
+    puts mdv2html(ARGF.read)
+  else
+    puts mdv2html(fixture)
+  end
 when /spec$/
   describe 'mdv2html' do
     it 'encodes mdv text to html text' do
