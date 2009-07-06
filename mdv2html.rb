@@ -42,6 +42,8 @@ blah blah blah
 
 blah blah blah. hara y y hara y?
 
+![A](http://aaa.jpg)
+
 Author: ujihisa
 EOF
 # }}}
@@ -78,6 +80,8 @@ when /spec$/
       |</code></pre>
       |
       |<p>blah blah blah. hara y y hara y?</p>
+      |
+      |<p><img src="http://aaa.jpg" alt="A" /></p>
       |
       |<address class="hack-author">ujihisa</address>
       EOF
