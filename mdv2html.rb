@@ -6,6 +6,7 @@ require 'markdown' # peg-markdown
 def mdv2html(text)
   text = text.lines.to_a[1..-1].join # Just ignore the first line
   body = Markdown.new(text).to_html
+  body.gsub!(%r!<img (.*?) />fit!, '<img \1 style="width: 100%;" />')
   body.gsub!(%r!<code>\|(.*?)\|</code>!, '<kbd>\1</kbd>')
   body.gsub!(%r!^<p>Author: (.*?)</p>$!, '<address class="hack-author">\1</address>') # FIXME: It should apply ONLY for the last line
   body
@@ -41,6 +42,8 @@ blah blah blah
     nnoremap k :<C-u>1000sl<Cr>
 
 blah blah blah. hara y y hara y?
+
+![A](http://aaa.jpg)fit
 
 ![A](http://aaa.jpg)
 
@@ -80,6 +83,8 @@ when /spec$/
       |</code></pre>
       |
       |<p>blah blah blah. hara y y hara y?</p>
+      |
+      |<p><img src="http://aaa.jpg" alt="A" style="width: 100%;" /></p>
       |
       |<p><img src="http://aaa.jpg" alt="A" /></p>
       |
