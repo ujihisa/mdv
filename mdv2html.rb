@@ -8,6 +8,7 @@ def mdv2html(text)
   body = Markdown.new(text).to_html
   body.gsub!(%r!<img (.*?) />fit!, '<img \1 style="width: 100%;" />')
   body.gsub!(%r!<code>\|(.*?)\|</code>!, '<kbd>\1</kbd>')
+  body.gsub!(%r!'[a-z]*?'!, '<code class="option">\0</code>')
   body.gsub!(%r!^<p>Author: (.*?)</p>$!, '<address class="hack-author">\1</address>') # FIXME: It should apply ONLY for the last line
   body
 end
