@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # vim: fileencoding=utf-8 foldmethod=marker
 require 'rubygems'
-require 'markdown' # peg-markdown
+require 'markdown' # rpeg-markdown
 
 def mdv2html(text)
   text = text.lines.to_a[1..-1].join # Just ignore the first line
