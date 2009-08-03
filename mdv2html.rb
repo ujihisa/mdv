@@ -44,6 +44,8 @@ blah blah blah
 
 blah blah blah. hara y y hara y?
 
+A nice option 'number' is great.
+
 ![A](http://aaa.jpg)fit
 
 ![A](http://aaa.jpg)
@@ -80,6 +82,8 @@ when /spec$/
       |</code></pre>
       |
       |<p>blah blah blah. hara y y hara y?</p>
+      |
+      |<p>A nice option <code class="option">'number'</code> is great.</p>
       |
       |<p><img src="http://aaa.jpg" alt="A" style="width: 100%;" /></p>
       |
