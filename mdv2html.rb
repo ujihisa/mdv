@@ -13,8 +13,16 @@ def mdv2html(text)
   body
 end
 
-def html2mdv(text)
-  'dummy text'
+def html2mdv(html)
+  html = html.gsub(%r!<address class="hack-author">(.*)</address>!, '<p>Author: \1</p>')
+  html = html.gsub(%r!<code class="option">(.*?)</code>!, %q!\1!)
+  html = html.gsub(%r!<kbd>(.*?)</kbd>!, '<code>|\1|</code>')
+  html = html.gsub(%r!<img (.*) style="width: 100%;" />!, '<img \1 />fit')
+  IO.popen('html2markdown', 'r+') {|io|
+    io.puts html
+    io.close_write
+    io.read
+  }
 end
 
 def headerline2hash(line)
