@@ -1,3 +1,4 @@
+#!spec
 #!/usr/bin/env ruby
 # vim: fileencoding=utf-8 foldmethod=marker
 require 'rubygems'
@@ -112,8 +113,46 @@ when /spec$/
 
   describe 'html2mdv' do
     it 'decodes html text to mdv text' do
+      # FIXME: Add headline
+      mdv =
+        <<-EOF.gsub(/^\s+\|/, '').chomp # {{{
+        |## PROBLEM
+        |
+        |blah blah blah
+        |
+        |## SOLUTION
+        |
+        |use
+        |[blogger.vim](http://www.vim.org/scripts/script.php?script_id=2638)
+        |with
+        |
+        |the key mapping `|j|`.
+        |
+        |## DISCUSSION
+        |
+        |blah blah blah
+        |
+        |    nnoremap j :<C-u>1000sl<Cr>
+        |    nnoremap k :<C-u>1000sl<Cr>
+        |
+        |blah blah blah. hara y y hara y?
+        |
+        |A nice option 'number' is great.
+        |
+        |![A](http://aaa.jpg)fit
+        |
+        |![A](http://aaa.jpg)
+        |
+        |Author: ujihisa
+        |
+        |
+        |
+        |
+        EOF
+        # }}}
+
       html2mdv(html).should be_instance_of(String)
-      html2mdv(html).should == fixture
+      html2mdv(html).should == mdv
     end
   end
 
