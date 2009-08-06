@@ -36,41 +36,41 @@ def headerline2hash(line)
   }
 end
 
-fixture =
-<<EOF # {{{
-# Hack #22: Ultra Super Great Vim Plugin | lv2 2009-06-06
-
-## PROBLEM
-blah blah blah
-
-## SOLUTION
-use [blogger.vim](http://www.vim.org/scripts/script.php?script_id=2638)
-with
-
-the key mapping `|j|`.
-
-## DISCUSSION
-blah blah blah
-
-    nnoremap j :<C-u>1000sl<Cr>
-    nnoremap k :<C-u>1000sl<Cr>
-
-blah blah blah. hara y y hara y?
-
-A nice option 'number' is great.
-
-![A](http://aaa.jpg)fit
-
-![A](http://aaa.jpg)
-
-Author: ujihisa
-EOF
-# }}}
-
 case $0
 when __FILE__
   puts mdv2html(ARGF.read)
 when /spec$/
+  fixture =
+    <<-EOF.gsub(/^\s+\|/, '').chomp # {{{
+    |# Hack #22: Ultra Super Great Vim Plugin | lv2 2009-06-06
+    |
+    |## PROBLEM
+    |blah blah blah
+    |
+    |## SOLUTION
+    |use [blogger.vim](http://www.vim.org/scripts/script.php?script_id=2638)
+    |with
+    |
+    |the key mapping `|j|`.
+    |
+    |## DISCUSSION
+    |blah blah blah
+    |
+    |    nnoremap j :<C-u>1000sl<Cr>
+    |    nnoremap k :<C-u>1000sl<Cr>
+    |
+    |blah blah blah. hara y y hara y?
+    |
+    |A nice option 'number' is great.
+    |
+    |![A](http://aaa.jpg)fit
+    |
+    |![A](http://aaa.jpg)
+    |
+    |Author: ujihisa
+    EOF
+    # }}}
+
   html =
       <<-EOF.gsub(/^\s+\|/, '').chomp # {{{
       |<h2>PROBLEM</h2>
