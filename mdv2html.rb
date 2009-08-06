@@ -13,6 +13,10 @@ def mdv2html(text)
   body
 end
 
+def html2mdv(text)
+  'dummy text'
+end
+
 def headerline2hash(line)
   m = line.match(/^# Hack #(\d+): (.*?) \| (.*?) (.*?)$/)
   {
@@ -58,9 +62,7 @@ case $0
 when __FILE__
   puts mdv2html(ARGF.read)
 when /spec$/
-  describe 'mdv2html' do
-    it 'encodes mdv text to html text' do
-      html =
+  html =
       <<-EOF.gsub(/^\s+\|/, '').chomp # {{{
       |<h2>PROBLEM</h2>
       |
@@ -92,10 +94,21 @@ when /spec$/
       |<address class="hack-author">ujihisa</address>
       EOF
       # }}}
+
+  describe 'mdv2html' do
+    it 'encodes mdv text to html text' do
       mdv2html(fixture).should be_instance_of(String)
       mdv2html(fixture).should == html
     end
   end
+
+  describe 'html2mdv' do
+    it 'decodes html text to mdv text' do
+      html2mdv(html).should be_instance_of(String)
+      html2mdv(html).should == fixture
+    end
+  end
+
 
   describe 'headerline2hash' do
     it 'gets hash from a line of header' do
