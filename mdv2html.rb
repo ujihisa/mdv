@@ -10,15 +10,8 @@ def mdv2html(text)
   body.gsub!(%r!<img (.*?) />fit!, '<img \1 style="width: 100%;" />')
   body.gsub!(%r!<code>\|(.*?)\|</code>!, '<kbd>\1</kbd>')
 
-  in_code = false
   body = body.split(/\n/).map {|line|
-    case line
-    when /<code>/
-      in_code = true
-    when /<\/code>/
-      in_code = false
-    end
-    if in_code
+    if (/<code>/ =~ line) .. (/<\/code>/ =~ line)
       line
     else
       line.gsub(%r!'[a-z]+?'!, '<code class="option">\0</code>')
