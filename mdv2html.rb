@@ -1,4 +1,3 @@
-#!/usr/bin/env spec
 #!/usr/bin/env ruby
 # vim: fileencoding=utf-8 foldmethod=marker
 require 'rubygems'
