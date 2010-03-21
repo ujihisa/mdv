@@ -9,7 +9,22 @@ def mdv2html(text)
   body = Markdown.new(text).to_html
   body.gsub!(%r!<img (.*?) />fit!, '<img \1 style="width: 100%;" />')
   body.gsub!(%r!<code>\|(.*?)\|</code>!, '<kbd>\1</kbd>')
-  body.gsub!(%r!'[a-z]+?'!, '<code class="option">\0</code>')
+
+  in_code = false
+  body = body.split(/\n/).map {|line|
+    case line
+    when /<code>/
+      in_code = true
+    when /<\/code>/
+      in_code = false
+    end
+    if in_code
+      line
+    else
+      line.gsub(%r!'[a-z]+?'!, '<code class="option">\0</code>')
+    end
+  }.join "\n"
+
   body.gsub!(%r!^<p>Author: (.*?)</p>$!, '<address class="hack-author">\1</address>') # FIXME: It should apply ONLY for the last line
   body
 end
@@ -58,6 +73,7 @@ when /spec$/
     |
     |    nnoremap j :<C-u>1000sl<Cr>
     |    nnoremap k :<C-u>1000sl<Cr>
+    |    call echo('hi')
     |
     |blah blah blah. hara y y hara y?
     |
@@ -92,6 +108,7 @@ when /spec$/
       |
       |<pre><code>nnoremap j :&lt;C-u&gt;1000sl&lt;Cr&gt;
       |nnoremap k :&lt;C-u&gt;1000sl&lt;Cr&gt;
+      |call echo('hi')
       |</code></pre>
       |
       |<p>blah blah blah. hara y y hara y?</p>
@@ -138,6 +155,7 @@ when /spec$/
         |
         |    nnoremap j :<C-u>1000sl<Cr>
         |    nnoremap k :<C-u>1000sl<Cr>
+        |    call echo('hi')
         |
         |blah blah blah. hara y y hara y?
         |
