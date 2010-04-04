@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# vim: fileencoding=utf-8 foldmethod=marker
+# vim: foldmethod=marker
 require 'rubygems'
 require 'markdown' # rpeg-markdown
 
