@@ -1,7 +1,12 @@
 #!/usr/bin/env ruby
 # vim: foldmethod=marker
-require 'rubygems'
-require 'markdown' # rpeg-markdown
+begin
+  require 'rubygems'
+  require 'markdown' # rpeg-markdown
+rescue LoadError
+  $: << File.expand_path('~/git/rpeg-markdown/lib')
+  require 'markdown'
+end
 
 def mdv2html(text)
   text = text.lines.to_a[1..-1].join # Just ignore the first line
