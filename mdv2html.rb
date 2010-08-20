@@ -1,12 +1,7 @@
 #!/usr/bin/env ruby
 # vim: foldmethod=marker
-begin
-  require 'rubygems'
-  require 'kramdown'
-rescue LoadError
-  $: << File.expand_path('~/git/kramdown/lib')
-  require 'kramdown'
-end
+require 'rubygems'
+require 'kramdown'
 
 def mdv2html(text)
   text = text.lines.to_a[1..-1].join # Just ignore the first line
