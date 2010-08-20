@@ -2,15 +2,15 @@
 # vim: foldmethod=marker
 begin
   require 'rubygems'
-  require 'markdown' # rpeg-markdown
+  require 'kramdown'
 rescue LoadError
-  $: << File.expand_path('~/git/rpeg-markdown/lib')
-  require 'markdown'
+  $: << File.expand_path('~/git/kramdown/lib')
+  require 'kramdown'
 end
 
 def mdv2html(text)
   text = text.lines.to_a[1..-1].join # Just ignore the first line
-  body = Markdown.new(text).to_html
+  body = Kramdown::Document.new(text).to_html
   body.gsub!(%r!<img (.*?) />fit!, '<img \1 style="width: 100%;" />')
   body.gsub!(%r!<code>\|(.*?)\|</code>!, '<kbd>\1</kbd>')
 
