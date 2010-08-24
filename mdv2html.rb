@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # vim: foldmethod=marker
+require 'date'
 require 'rubygems'
 require 'kramdown'
 
