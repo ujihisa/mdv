@@ -4,9 +4,16 @@ require 'date'
 require 'rubygems'
 require 'kramdown'
 
+class Kramdown::Parser::MarkdownVimhacks < Kramdown::Parser::Kramdown
+  def initialize(source, options)
+    super
+    @span_parsers.delete(:smart_quotes)
+  end
+end
+
 def mdv2html(text)
   text = text.lines.to_a[1..-1].join # Just ignore the first line
-  body = Kramdown::Document.new(text, :auto_ids => false).to_html
+  body = Kramdown::Document.new(text, :auto_ids => false, :input => 'MarkdownVimhacks').to_html
   body.gsub!(%r!<img (.*?) />fit!, '<img \1 style="width: 100%;" />')
   body.gsub!(%r!<code>\|(.*?)\|</code>!, '<kbd>\1</kbd>')
 
